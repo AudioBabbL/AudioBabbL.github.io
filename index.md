@@ -11,3 +11,7 @@ git push -u origin main
 Linux:  Debian 12 on Hostinger KVM-1
 
 Apache-2:       [see https://phoenixnap.com/kb/how-to-install-phpmyadmin-on-debian]
+
+```
+sudo apt update -y
+```
