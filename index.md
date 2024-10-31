@@ -261,7 +261,7 @@ sudo apt update -y && sudo apt install certbot python3-certbot-apache
 sudo systemctl stop apache2
 ```
 ```
-sudo certbot certonly --standalone -d yourdomain.com
+sudo certbot --apache
 ```
 TEST:
 ```
