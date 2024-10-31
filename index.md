@@ -176,12 +176,83 @@ check with:
 dig A +short domain.com
 ```
 
+## setup ufw firewall
+
+```
+sudo apt install ufw
+```
+```
+sudo ufw enable
+```
+sudo ufw app list
+```
+```
+sudo ufw allow in "WWW Full"
+```
+```
+sudo ufw allow in "OpenSSH"
+```
+
+```
+sudo ufw status
+```
+(should look like this:)
+```
+Output
+Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere                  
+WWW Full                ALLOW       Anywhere                  
+OpenSSH (v6)               ALLOW       Anywhere (v6)             
+WWW Full (v6)           ALLOW       Anywhere (v6)        
+```
+
+- **Create apache hostfile config**
+
+```
+nano /etc/apache2/sites-available/yourdomain.conf
+```
+
+```
+<VirtualHost *:80>
+    ServerName example.com
+    # ServerAlias www.example.com
+    ServerAdmin webmaster@example.com
+    DocumentRoot /var/www/wordpress
+
+    <Directory /var/www/wordpress>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/wordpress-error.log
+    CustomLog ${APACHE_LOG_DIR}/wordpress-access.log combined
+</VirtualHost>
+```
+
+create sybolic link:
+```
+ln -s /etc/apache2/sites-available/yourdomain.conf /etc/apache2/sites-enabled/
+```
+```
+a2ensite yourdomain.conf
+```
+```
+apachectl configtest
+```
+```
+systemctl restart apache2
+```
+
+
 ## setup permanent ssl cert
 
 Let's Encrypt & Certbot
 
 ```
-sudo apt update -y && sudo apt install certbot
+sudo apt update -y && sudo apt install certbot python3-certbot-apache
 ```
 
 ```
@@ -235,39 +306,3 @@ find /var/www/html/yourdomainfolder -type d -exec chmod 755 {} \;
 find /var/www/html/yourdomainfolder -type f -exec chmod 644 {} \;
 ```
 
-- **Create Apache host file config**
-
-```
-nano /etc/apache2/sites-available/yourdomain.conf
-```
-
-```
-<VirtualHost *:80>
-    ServerName example.com
-    # ServerAlias www.example.com
-    ServerAdmin webmaster@example.com
-    DocumentRoot /var/www/wordpress
-
-    <Directory /var/www/wordpress>
-        Options -Indexes +FollowSymLinks
-        AllowOverride All
-    </Directory>
-
-    ErrorLog ${APACHE_LOG_DIR}/wordpress-error.log
-    CustomLog ${APACHE_LOG_DIR}/wordpress-access.log combined
-</VirtualHost>
-```
-
-create sybolic link:
-```
-ln -s /etc/apache2/sites-available/yourdomain.conf /etc/apache2/sites-enabled/
-```
-```
-a2ensite yourdomain.conf
-```
-```
-apachectl configtest
-```
-```
-systemctl restart apache2
-```
