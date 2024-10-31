@@ -161,3 +161,113 @@ sudo systemctl restart apache2
 access phpMyadmin from browser: <<localhost>>/phpMyAdmin
 
 use 'root' and password set during MariaDB secure setup.
+
+
+# --- 2024-10-31 ---
+
+## setup nameservers / DNS
+
+- point DNS records to IP of VPS
+- two A records: [1] domain.com [2] www.domain.com
+
+check with:
+
+```
+dig A +short domain.com
+```
+
+## setup permanent ssl cert
+
+Let's Encrypt & Certbot
+
+```
+sudo apt update -y && sudo apt install certbot
+```
+
+```
+sudo systemctl stop apache2
+```
+```
+sudo certbot certonly --standalone -d yourdomain.com
+```
+TEST:
+```
+sudo certbot renew --dry-run
+```
+
+```
+sudo systemctl start apache2
+```
+
+
+## setup WORDPRESS
+
+- **create database / user**
+
+via phpMyAdmin: create database, create user, grant all priveleges to that database to user
+
+- **Download Wordpress**
+
+```
+cd /tmp
+```
+```
+wget https://wordpress.org/latest.tar.gz
+```
+```
+tar xpf latest.tar.gz
+```
+(if not done already)
+```
+mkdir /var/www/html/youdomainfolder
+```
+```
+cp -R wordpress/* /var/www/html/yourdomainfolder/
+```
+
+```
+chown -R www-data:www-data /var/www/html/yourdomainfolder
+```
+```
+find /var/www/html/yourdomainfolder -type d -exec chmod 755 {} \;
+```
+```
+find /var/www/html/yourdomainfolder -type f -exec chmod 644 {} \;
+```
+
+- **Create Apache host file config**
+
+```
+nano /etc/apache2/sites-available/yourdomain.conf
+```
+
+```
+<VirtualHost *:80>
+    ServerName example.com
+    # ServerAlias www.example.com
+    ServerAdmin webmaster@example.com
+    DocumentRoot /var/www/wordpress
+
+    <Directory /var/www/wordpress>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/wordpress-error.log
+    CustomLog ${APACHE_LOG_DIR}/wordpress-access.log combined
+</VirtualHost>
+```
+
+create sybolic link:
+```
+ln -s /etc/apache2/sites-available/yourdomain.conf /etc/apache2/sites-enabled/
+```
+```
+a2ensite yourdomain.conf
+```
+```
+apachectl configtest
+```
+```
+systemctl restart apache2
+```
