@@ -188,6 +188,7 @@ sudo ufw enable
 ```
 sudo ufw app list
 ```
+```
 sudo ufw allow in "WWW Full"
 ```
 ```
