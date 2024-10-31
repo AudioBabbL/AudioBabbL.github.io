@@ -12,6 +12,8 @@ git push -u origin main
 
 ## setup LAMP: Linux, Apache2, MariaDB, PhpMyAdmin
 
+[see: https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-11]
+
 - **Linux:**  Debian 12 on Hostinger KVM-1
 
 - **Apache-2:**       [see https://phoenixnap.com/kb/how-to-install-phpmyadmin-on-debian]
@@ -105,7 +107,7 @@ FLUSH PRIVILEGES;
 SHOW GRANTS FOR 'user1'@localhost;
 ```
 
-- **Install phpMyadmin**
+- **Install phpMyadmin** [see: https://phoenixnap.com/kb/how-to-install-phpmyadmin-on-debian]
 
 ```
 wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
@@ -249,7 +251,8 @@ systemctl restart apache2
 ```
 
 
-## setup permanent ssl cert
+## setup permanent ssl cert 
+[see: https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu]
 
 Let's Encrypt & Certbot
 
