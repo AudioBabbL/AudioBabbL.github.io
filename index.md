@@ -1,3 +1,5 @@
+# Push local changes to this site:
+(set up SHH on local machine and Github for password-less operation)
 ```
 git add --all &&
 git commit -m "Initial commit" &&
