@@ -15,3 +15,7 @@ Apache-2:       [see https://phoenixnap.com/kb/how-to-install-phpmyadmin-on-debi
 ```
 sudo apt update -y
 ```
+
+```
+sudo apt install wget -y
+```
