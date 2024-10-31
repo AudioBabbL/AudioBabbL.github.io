@@ -6,7 +6,7 @@ git commit -m "Initial commit" &&
 git push -u origin main
 ```
 
---- 2024-10-30 ---
+# --- 2024-10-30 ---
 
 ## setup LAMP: Linux, Apache2, MariaDB, PhpMyAdmin
 
