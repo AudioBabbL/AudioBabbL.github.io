@@ -104,5 +104,56 @@ SHOW GRANTS FOR 'user1'@localhost;
 - **Install phpMyadmin**
 
 ```
-wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-english.tar.gz
+wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 ```
+
+```
+wget -P Downloads https://files.phpmyadmin.net/phpmyadmin.keyring
+```
+```
+cd Downloads
+```
+(may need to install gpg)
+```
+sudo apt-get install gnupg
+```
+```
+gpg --import phpmyadmin.keyring
+```
+```
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz.asc
+```
+```
+gpg --verify phpMyAdmin-latest-all-languages.tar.gz.asc
+```
+
+```
+sudo mkdir /var/www/html/phpMyAdmin
+```
+
+```
+sudo tar xvf phpMyAdmin-latest-all-languages.tar.gz --strip-components=1 -C /var/www/html/phpMyAdmin
+```
+
+
+```
+sudo cp /var/www/html/phpMyAdmin/config.sample.inc.php /var/www/html/phpMyAdmin/config.inc.php
+```
+```
+sudo nano /var/www/html/phpMyAdmin/config.inc.php
+```
+enter blowfish passphrase of choice, ctrl+X, Y
+
+```
+sudo chmod 660 /var/www/html/phpMyAdmin/config.inc.php
+```
+```
+sudo chown -R www-data:www-data /var/www/html/phpMyAdmin
+```
+```
+sudo systemctl restart apache2
+```
+
+access phpMyadmin from browser: <<localhost>>/phpMyAdmin
+
+use 'root' and password set during MariaDB secure setup.
