@@ -1,5 +1,7 @@
 # Push local changes to this site:
-(set up SHH on local machine and Github for password-less operation)
+(set up SHH on local machine and Github for password-less operation) -- see: https://thelinuxcode.com/push-to-github-without-password-using-ssh-key/
+
+from local directory:
 ```
 git add --all &&
 git commit -m "Initial commit" &&
