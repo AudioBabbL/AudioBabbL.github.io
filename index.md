@@ -52,8 +52,13 @@ sudo mysql_secure_installation
 As you have not yet set a root password for your database, hit Enter to skip the initial query. Complete the following queries:
 
 Switch to unix_socket authentication [Y/n]. Enter n to skip.
+
 Set root password? [Y/n]. Type y and press Enter to create a strong root password for your database. If you already have a root password, enter n to answer the Change the root password question.
+
 Remove anonymous users? [Y/n]. Type y and press Enter.
+
 Disallow root login remotely? [Y/n]. Type y and press Enter.
+
 Remove test database and access to it? [Y/n]. Type y and confirm with Enter.
+
 Reload privilege tables now? [Y/n]. Type y and confirm with Enter.
