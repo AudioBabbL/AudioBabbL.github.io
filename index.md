@@ -169,8 +169,11 @@ use 'root' and password set during MariaDB secure setup.
 
 ## setup nameservers / DNS
 
+[porkbun]
 - point DNS records to IP of VPS
 - two A records: [1] domain.com [2] www.domain.com
+[hostinger]
+- two A records: [1] @ [2] www
 
 check with:
 
